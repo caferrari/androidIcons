@@ -1,11 +1,8 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
     header('location: index.php');
     exit();
 }
-
-
 
 $formats = array(
     'hdpi' => array(38, 48, 72),
@@ -28,15 +25,10 @@ $zip->open($zip_file, ZIPARCHIVE::OVERWRITE);
 
 for ($file_id = 0; $file_id < $files; $file_id++){
     if ($_FILES['image']['error'][$file_id] > 0) continue;
-
     $type = mime_content_type($_FILES['image']['tmp_name'][$file_id]);
-    
     if (!in_array($type, $valid_types)) die ("Invalid file format: $type");
-    
     $file = file_get_contents($_FILES['image']['tmp_name'][$file_id]);
-    
     $name = preg_replace('@\.[a-z]+$@', '', $_FILES['image']['name'][$file_id]);
-    
     $image = new Imagick();	
     $image->readImageBlob($file);
     $image->setImageFormat('png');
