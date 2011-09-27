@@ -41,7 +41,6 @@ for ($file_id = 0; $file_id < $files; $file_id++){
             $current->clear();
             $current->destroy(); 
         }
-
     }
     $image->clear();
     $image->destroy();
